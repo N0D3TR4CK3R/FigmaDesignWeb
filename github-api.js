@@ -6,19 +6,24 @@ class GitHubProjects {
     }
 
     async fetchRepositories() {
+        console.log('[GitHubProjects] Iniciando fetchRepositories...');
         try {
-            const response = await fetch(`${this.apiUrl}/users/${this.username}/repos`, {
+            const url = `${this.apiUrl}/users/${this.username}/repos`;
+            console.log('[GitHubProjects] Fetching:', url);
+            const response = await fetch(url, {
                 headers: {
                     'Accept': 'application/vnd.github.v3+json'
                 }
             });
+            console.log('[GitHubProjects] Response status:', response.status);
             if (!response.ok) {
                 throw new Error(`GitHub API error: ${response.status}`);
             }
             const repos = await response.json();
+            console.log('[GitHubProjects] Repos obtenidos:', repos);
             return repos.filter(repo => !repo.fork && !repo.private).slice(0, 6); // Top 6 públicos
         } catch (error) {
-            console.error('Error fetching GitHub repositories:', error);
+            console.error('[GitHubProjects] Error fetching GitHub repositories:', error);
             return [];
         }
     }
@@ -81,9 +86,12 @@ class GitHubProjects {
     }
 
     async loadProjects() {
+        console.log('[GitHubProjects] Iniciando loadProjects...');
         const repos = await this.fetchRepositories();
         const carousel = document.getElementById('servicesCarousel');
+        console.log('[GitHubProjects] carousel:', carousel);
         if (!carousel || repos.length === 0) {
+            console.warn('[GitHubProjects] No repositories found or carousel not available');
             carousel.innerHTML = `<div class='col-12 text-center'><p>No public projects found.</p></div>`;
             return;
         }
@@ -116,6 +124,7 @@ class GitHubProjects {
             `;
             carousel.innerHTML += card;
         });
+        console.log('[GitHubProjects] Tarjetas generadas:', repos.length);
         this.updateCarousel();
     }
 
@@ -143,10 +152,12 @@ class GitHubProjects {
         if (cards.length > 0) {
             changeCard(0);
         }
+        console.log('[GitHubProjects] Carousel initialized with', cards.length, 'cards');
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('[GitHubProjects] DOMContentLoaded');
     const githubProjects = new GitHubProjects();
     if (window.location.pathname.includes('services.html')) {
         githubProjects.loadProjects();

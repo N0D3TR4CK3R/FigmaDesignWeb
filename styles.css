@@ -367,6 +367,15 @@ body {
     .contact-section {
         padding: 60px 0;
     }
+    
+    /* Mobile hero spacing */
+    .hero-section .col-lg-6:last-child {
+        margin-top: 2rem;
+    }
+    
+    .hero-section .hero-content {
+        margin-bottom: 2rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -399,6 +408,15 @@ body {
     
     .hero-section-secondary .hero-title {
         font-size: 2rem;
+    }
+    
+    /* Extra mobile hero spacing */
+    .hero-section .col-lg-6:last-child {
+        margin-top: 3rem;
+    }
+    
+    .hero-section .hero-content {
+        margin-bottom: 3rem;
     }
 }
 

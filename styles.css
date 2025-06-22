@@ -331,6 +331,122 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) and (min-width: 769px) {
+    /* Tablet and medium screen optimizations */
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-section {
+        min-height: 90vh;
+        padding: 110px 0 50px;
+    }
+    
+    .hero-section-secondary {
+        min-height: 40vh;
+        padding: 110px 0 50px;
+    }
+    
+    .hero-section-secondary .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .services-section,
+    .about-section,
+    .contact-section {
+        padding: 70px 0;
+    }
+    
+    /* Better spacing for medium screens */
+    .hero-section .row {
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .hero-content {
+        padding-right: 1rem;
+    }
+    
+    /* Service cards optimization */
+    .service-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* About section improvements */
+    .about-content h2 {
+        font-size: 2.2rem;
+    }
+    
+    .about-content p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+}
+
+/* Specific optimization for 992px-1200px range (like 932x921) */
+@media (max-width: 1200px) and (min-width: 992px) {
+    .hero-title {
+        font-size: 3.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .hero-section {
+        min-height: 85vh;
+        padding: 120px 0 60px;
+    }
+    
+    .hero-section-secondary {
+        min-height: 35vh;
+        padding: 120px 0 60px;
+    }
+    
+    .hero-section-secondary .hero-title {
+        font-size: 3rem;
+    }
+    
+    /* Improved layout for this specific range */
+    .hero-section .container {
+        max-width: 960px;
+    }
+    
+    .hero-section .row {
+        gap: 3rem;
+    }
+    
+    .hero-content {
+        padding-right: 1.5rem;
+    }
+    
+    /* Better service card layout */
+    .service-card {
+        margin-bottom: 2rem;
+        padding: 2.5rem;
+    }
+    
+    /* About section spacing */
+    .about-section .row {
+        gap: 3rem;
+    }
+    
+    .about-content h2 {
+        font-size: 2.4rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.5rem;

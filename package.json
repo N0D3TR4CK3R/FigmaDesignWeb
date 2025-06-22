@@ -1,0 +1,20 @@
+{
+  "name": "figma-design-website",
+  "version": "1.0.0",
+  "description": "A responsive website built from Figma design",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server",
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "@popperjs/core": "^2.11.8"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["bootstrap", "figma", "responsive", "website"],
+  "author": "",
+  "license": "MIT"
+} 

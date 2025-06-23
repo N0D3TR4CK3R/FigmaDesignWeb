@@ -1,175 +1,235 @@
-# NodeCracker - Cybersecurity Portfolio
+# NodeCracker - Portafolio de Ciberseguridad
 
-A responsive, accessible cybersecurity portfolio website showcasing NodeCracker's expertise in secure technological solutions and security culture development.
+Un portafolio web responsivo y accesible que muestra la experiencia de NodeCracker en soluciones tecnológicas seguras y desarrollo de cultura de seguridad.
 
-## 🌟 Features
+## Características Principales
 
-### Core Functionality
-- **Multi-page Website**: Home, Projects, About, and Contact pages
-- **Dynamic Project Showcase**: Real-time GitHub API integration to display portfolio projects
-- **Responsive Design**: Optimized for all devices and screen sizes
-- **Modern UI/UX**: Clean, professional design with smooth animations
+### Funcionalidad Básica
+- **Sitio Web Multi-página**: Páginas de Inicio, Proyectos, Acerca de Nosotros y Contacto
+- **Muestra Dinámica de Proyectos**: Integración en tiempo real con la API de GitHub para mostrar proyectos del portafolio
+- **Diseño Responsivo**: Optimizado para todos los dispositivos y tamaños de pantalla
+- **Interfaz Moderna**: Diseño limpio y profesional con animaciones suaves
 
-### Accessibility Features (WCAG 2.1 AA Compliant)
-- **Semantic HTML5**: Proper use of `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
-- **Keyboard Navigation**: Full keyboard accessibility with visible focus indicators
-- **Screen Reader Support**: ARIA labels, roles, and descriptions throughout
-- **Skip Links**: "Skip to main content" link for keyboard users
-- **High Contrast**: Enhanced focus styles and color contrast ratios
-- **Form Accessibility**: Proper labels, error handling, and validation feedback
-- **Reduced Motion**: Respects user preferences for reduced motion
-- **Dark Mode Support**: Automatic dark mode detection and styling
-- **Print Styles**: Optimized printing experience
+### Características de Accesibilidad (Cumple WCAG 2.1 AA)
+- **HTML5 Semántico**: Uso correcto de `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+- **Navegación por Teclado**: Accesibilidad completa con indicadores de foco visibles
+- **Soporte para Lectores de Pantalla**: Etiquetas ARIA, roles y descripciones en todo el sitio
+- **Enlaces de Salto**: Enlace "Saltar al contenido principal" para usuarios de teclado
+- **Alto Contraste**: Estilos de foco mejorados y ratios de contraste de color
+- **Accesibilidad de Formularios**: Etiquetas apropiadas, manejo de errores y retroalimentación de validación
+- **Reducción de Movimiento**: Respeta las preferencias del usuario para movimiento reducido
+- **Soporte para Modo Oscuro**: Detección automática y estilos para modo oscuro
+- **Estilos de Impresión**: Experiencia de impresión optimizada
 
-## 🚀 Technologies Used
+## Tecnologías Utilizadas
 
-- **HTML5**: Semantic markup with accessibility features
-- **CSS3**: Modern styling with accessibility considerations
-- **Bootstrap 5**: Responsive framework with custom accessibility enhancements
-- **JavaScript**: Interactive features and GitHub API integration
-- **Font Awesome**: Accessible icon library
-- **GitHub API**: Dynamic project loading
+- **HTML5**: Marcado semántico con características de accesibilidad
+- **CSS3**: Estilos modernos con consideraciones de accesibilidad
+- **Bootstrap 5**: Framework responsivo con mejoras de accesibilidad personalizadas
+- **JavaScript**: Características interactivas e integración con API de GitHub
+- **Font Awesome**: Biblioteca de iconos accesible
+- **API de GitHub**: Carga dinámica de proyectos
 
-## 📁 Project Structure
+## Estructura del Proyecto
 
 ```
 FigmaDesing/
-├── index.html          # Home page with hero section
-├── services.html       # Projects showcase with GitHub API
-├── about.html          # Team and mission information
-├── contact.html        # Contact form with validation
-├── styles.css          # Main stylesheet with accessibility features
-├── github-api.js       # GitHub API integration
-├── assets/             # Images and logos
+├── index.html          # Página de inicio con sección hero
+├── services.html       # Muestra de proyectos con API de GitHub
+├── about.html          # Información del equipo y misión
+├── contact.html        # Formulario de contacto con validación
+├── styles.css          # Hoja de estilos principal con características de accesibilidad
+├── github-api.js       # Integración con API de GitHub
+├── assets/             # Imágenes y logos
 │   ├── me_image.png
 │   ├── s_logo_w.png
 │   ├── sc_logo_b.png
 │   └── sc_logo_w.png
-└── README.md           # Project documentation
+└── README.md           # Documentación del proyecto
 ```
 
-## ♿ Accessibility Implementation
+## Implementación de Accesibilidad
 
-### HTML Semantics
-- Proper heading hierarchy (H1-H6)
-- Semantic landmarks (`<header>`, `<nav>`, `<main>`, `<footer>`)
-- ARIA labels and roles for interactive elements
-- Descriptive alt text for all images
-- Form labels and error associations
+### Semántica HTML
+- Jerarquía correcta de encabezados (H1-H6)
+- Puntos de referencia semánticos (`<header>`, `<nav>`, `<main>`, `<footer>`)
+- Etiquetas ARIA y roles para elementos interactivos
+- Texto alternativo descriptivo para todas las imágenes
+- Asociaciones de etiquetas y errores en formularios
 
-### Keyboard Navigation
-- Tab navigation through all interactive elements
-- Visible focus indicators with high contrast
-- Skip to main content link (Ctrl+M shortcut)
-- Arrow key navigation for carousel components
-- Enter key support for form submission
+### Navegación por Teclado
+- Navegación con Tab a través de todos los elementos interactivos
+- Indicadores de foco visibles con alto contraste
+- Enlace para saltar al contenido principal (atajo Ctrl+M)
+- Navegación con teclas de flecha para componentes de carrusel
+- Soporte para tecla Enter en envío de formularios
 
-### Screen Reader Support
-- ARIA live regions for dynamic content
-- Proper list semantics (`role="list"`, `role="listitem"`)
-- Descriptive link text (no "click here")
-- Form field instructions and error announcements
-- Current page indicators (`aria-current="page"`)
+### Soporte para Lectores de Pantalla
+- Regiones ARIA en vivo para contenido dinámico
+- Semántica de lista apropiada (`role="list"`, `role="listitem"`)
+- Texto descriptivo en enlaces (evita "haz clic aquí")
+- Instrucciones de campos de formulario y anuncios de errores
+- Indicadores de página actual (`aria-current="page"`)
 
-### Visual Accessibility
-- High contrast color schemes
-- Sufficient text size and spacing
-- Clear visual hierarchy
-- Focus indicators visible on all interactive elements
-- Reduced motion support for users with vestibular disorders
+### Accesibilidad Visual
+- Esquemas de color de alto contraste
+- Tamaño de texto y espaciado suficientes
+- Jerarquía visual clara
+- Indicadores de foco visibles en todos los elementos interactivos
+- Soporte para movimiento reducido para usuarios con trastornos vestibulares
 
-### Form Accessibility
-- Proper label associations
-- Required field indicators
-- Real-time validation with error messages
-- Success/error announcements for screen readers
-- Keyboard-friendly form navigation
+### Accesibilidad de Formularios
+- Asociaciones de etiquetas apropiadas
+- Indicadores de campos requeridos
+- Validación en tiempo real con mensajes de error
+- Anuncios de éxito/error para lectores de pantalla
+- Navegación por teclado amigable en formularios
 
-## 🎨 Design Features
+## Características de Diseño
 
-### Responsive Layout
-- Mobile-first approach
-- Flexible grid system
-- Optimized typography scaling
-- Touch-friendly interface elements
+### Diseño Responsivo
+- Enfoque mobile-first
+- Sistema de cuadrícula flexible
+- Escalado de tipografía optimizado
+- Elementos de interfaz táctiles
 
-### Visual Design
-- Modern gradient backgrounds
-- Smooth hover animations
-- Professional color scheme
-- Consistent spacing and typography
+### Diseño Visual
+- Fondos con gradientes modernos
+- Animaciones suaves al pasar el cursor
+- Esquema de colores profesional
+- Espaciado y tipografía consistentes
 
-### Interactive Elements
-- Hover effects on cards and buttons
-- Smooth scrolling navigation
-- Carousel functionality for projects
-- Form validation with visual feedback
+### Elementos Interactivos
+- Efectos hover en tarjetas y botones
+- Navegación con desplazamiento suave
+- Funcionalidad de carrusel para proyectos
+- Validación de formularios con retroalimentación visual
 
-## 🔧 Setup and Installation
+## Configuración e Instalación
 
-1. **Clone the repository**:
+1. **Clonar el repositorio**:
    ```bash
-   git clone [repository-url]
+   git clone [url-del-repositorio]
    cd FigmaDesing
    ```
 
-2. **Open in browser**:
-   - Simply open `index.html` in any modern web browser
-   - No build process required - pure HTML, CSS, and JavaScript
+2. **Abrir en navegador**:
+   - Simplemente abre `index.html` en cualquier navegador web moderno
+   - No se requiere proceso de construcción - HTML, CSS y JavaScript puros
 
-3. **Local development**:
-   - Use a local server for best experience
-   - Recommended: Live Server extension in VS Code
+3. **Desarrollo local**:
+   - Usa un servidor local para mejor experiencia
+   - Recomendado: Extensión Live Server en VS Code
 
-## 📱 Browser Support
+## Soporte de Navegadores
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
+- Chrome (última versión)
+- Firefox (última versión)
+- Safari (última versión)
+- Edge (última versión)
+- Navegadores móviles (iOS Safari, Chrome Mobile)
 
-## ♿ Accessibility Testing
+## Pruebas de Accesibilidad
 
-### Manual Testing
-- **Keyboard Navigation**: Tab through all interactive elements
-- **Screen Reader**: Test with NVDA, JAWS, or VoiceOver
-- **Color Contrast**: Verify sufficient contrast ratios
-- **Focus Indicators**: Ensure visible focus on all elements
+### Pruebas Manuales
+- **Navegación por Teclado**: Navega con Tab por todos los elementos interactivos
+- **Lector de Pantalla**: Prueba con NVDA, JAWS o VoiceOver
+- **Contraste de Color**: Verifica ratios de contraste suficientes
+- **Indicadores de Foco**: Asegura foco visible en todos los elementos
 
-### Automated Testing
-- **Lighthouse**: Run accessibility audit
-- **axe DevTools**: Browser extension for accessibility testing
-- **WAVE**: Web accessibility evaluation tool
+### Pruebas Automatizadas
+- **Lighthouse**: Ejecuta auditoría de accesibilidad
+- **axe DevTools**: Extensión de navegador para pruebas de accesibilidad
+- **WAVE**: Herramienta de evaluación de accesibilidad web
 
-### Keyboard Shortcuts
-- **Tab**: Navigate through interactive elements
-- **Enter/Space**: Activate buttons and links
-- **Ctrl+M**: Skip to main content
-- **Arrow Keys**: Navigate carousel (on projects page)
+### Atajos de Teclado
+- **Tab**: Navegar por elementos interactivos
+- **Enter/Espacio**: Activar botones y enlaces
+- **Ctrl+M**: Saltar al contenido principal
+- **Teclas de Flecha**: Navegar carrusel (en página de proyectos)
 
-## 🌐 Live Demo
+## Requerimientos de Accesibilidad Implementados
 
-Visit the live website: [NodeCracker Portfolio](https://your-username.github.io/FigmaDesing/)
+### Uso Correcto de Etiquetas Semánticas HTML5
+- Implementadas etiquetas `<header>`, `<nav>`, `<main>`, `<footer>` en todas las páginas
+- Estructura semántica correcta con secciones apropiadas
+- Jerarquía de encabezados H1-H6 respetada
 
-## 📄 License
+### Contraste Adecuado entre Texto y Fondo
+- Ratios de contraste que cumplen WCAG 2.1 AA (4.5:1 para texto normal, 3:1 para texto grande)
+- Colores de texto optimizados para modo claro y oscuro
+- Indicadores de foco con alto contraste
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Atributos Alt Descriptivos en Todas las Imágenes
+- Texto alternativo descriptivo para todas las imágenes
+- Incluye información contextual relevante
+- Imágenes decorativas marcadas con `aria-hidden="true"`
 
-## 🤝 Contributing
+### Etiquetas de Formulario Apropiadas
+- Etiquetas `<label>` asociadas correctamente con campos de formulario
+- Indicadores de campos requeridos con asteriscos
+- Mensajes de error asociados con campos específicos
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes with accessibility in mind
-4. Test with keyboard navigation and screen readers
-5. Submit a pull request
+### Navegación con Teclado Funcional
+- Navegación completa con teclado (Tab, Enter, Espacio)
+- Enlace "Saltar al contenido principal" para usuarios de teclado
+- Atajo de teclado Ctrl+M para acceso rápido al contenido principal
+- Navegación con flechas en componentes de carrusel
 
-## 📞 Contact
+### Jerarquía Explícita en Títulos
+- Estructura de encabezados H1-H6 implementada correctamente
+- Un solo H1 por página
+- Jerarquía lógica y semántica
+
+### Descripción Clara en Enlaces y Botones
+- Texto descriptivo en todos los enlaces (evita "haz clic aquí")
+- Etiquetas ARIA apropiadas para botones
+- Contexto claro sobre la función de cada enlace
+
+### Criterios de Legibilidad y Comprensión
+- Texto claro y comprensible
+- Estructura de contenido lógica
+- Información organizada de manera accesible
+- Soporte para diferentes niveles de comprensión
+
+## Modo Oscuro
+
+El sitio incluye soporte completo para modo oscuro con:
+- Detección automática de preferencias del sistema
+- Contraste optimizado para texto y elementos interactivos
+- Fondos oscuros apropiados para todas las secciones
+- Colores de acento mantenidos para consistencia de marca
+
+## Estilos de Impresión
+
+Optimizados para impresión con:
+- Eliminación de elementos de navegación innecesarios
+- Contraste mejorado para impresión en blanco y negro
+- URLs visibles para enlaces externos
+- Estructura de contenido simplificada
+
+## Demo en Vivo
+
+Visita el sitio web en vivo: [Portafolio NodeCracker](https://n0d3tr4ck3r.github.io/FigmaDesignWeb/)
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para detalles.
+
+## Contribuir
+
+1. Haz fork del repositorio
+2. Crea una rama de características
+3. Realiza tus cambios considerando la accesibilidad
+4. Prueba con navegación por teclado y lectores de pantalla
+5. Envía un pull request
+
+## Contacto
 
 - **Email**: info@nodecracker.com
-- **Phone**: +1 (555) 123-4567
-- **Website**: [NodeCracker](https://nodecracker.com)
+- **Teléfono**: +1 (555) 123-4567
+- **Sitio Web**: [NodeCracker](https://nodecracker.com)
 
 ---
 
-**Built with ♥ and accessibility in mind** 
+**Construido con accesibilidad en mente** 

@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Figma Design Website</title>
+    <meta name="description" content="Contact NodeCracker for cybersecurity consulting services. Get in touch with our team to discuss your security needs and project requirements.">
+    <meta name="keywords" content="contact NodeCracker, cybersecurity contact, security consulting contact, NodeCracker team contact">
+    <meta name="author" content="NodeCracker Team">
+    <title>Contact Us - NodeCracker | Get in Touch for Cybersecurity Services</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -12,147 +15,176 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f0f0f;">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="assets\s_logo_w.png" alt="Logo" height="37">
-            </a>
-            
-            <!-- Mobile Toggle Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- Navigation Menu -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Contact Hero Section -->
-    <section class="hero-section-secondary">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="hero-title">Contact Us</h1>
-                    <p class="hero-subtitle">Get in touch with our team</p>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f0f0f;" role="navigation" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand" href="index.html" aria-label="NodeCracker - Go to homepage">
+                    <img src="assets\s_logo_w.png" alt="NodeCracker logo" height="37" width="67">
+                </a>
+                
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                    <span class="navbar-toggler-icon" aria-hidden="true"></span>
+                </button>
+                
+                <!-- Navigation Menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto" role="menubar">
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="index.html" role="menuitem">Home</a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="services.html" role="menuitem">My Projects</a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="about.html" role="menuitem">About Us</a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link active" href="contact.html" role="menuitem" aria-current="page">Contact</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
+    </header>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="row">
-                        <!-- Contact Form -->
-                        <div class="col-lg-6 mb-4 mb-lg-0">
-                            <div class="contact-form">
-                                <h3 class="mb-4">Send us a message</h3>
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="subject" class="form-label">Subject</label>
-                                        <input type="text" class="form-control" id="subject" placeholder="Enter subject" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="message" class="form-label">Message</label>
-                                        <textarea class="form-control" id="message" rows="4" placeholder="Enter your message" required></textarea>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-star me-2"></i>
-                                            Send Message
-                                            <i class="fas fa-times ms-2"></i>
-                                        </button>
-                                    </div>
-                                </form>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Contact Hero Section -->
+        <section class="hero-section-secondary" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 id="contact-title" class="hero-title">Contact Us</h1>
+                        <p class="hero-subtitle">Get in touch with our cybersecurity team</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" aria-labelledby="contact-form-title">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <!-- Contact Form -->
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <div class="contact-form">
+                                    <h3 id="contact-form-title" class="mb-4">Send us a message</h3>
+                                    <form id="contactForm" novalidate aria-describedby="form-instructions">
+                                        <div id="form-instructions" class="visually-hidden">Please fill out all required fields to send us a message about your cybersecurity needs.</div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Full Name <span class="text-danger" aria-label="required">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required aria-required="true" aria-describedby="name-error">
+                                            <div id="name-error" class="invalid-feedback" role="alert"></div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email Address <span class="text-danger" aria-label="required">*</span></label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required aria-required="true" aria-describedby="email-error">
+                                            <div id="email-error" class="invalid-feedback" role="alert"></div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Subject <span class="text-danger" aria-label="required">*</span></label>
+                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter message subject" required aria-required="true" aria-describedby="subject-error">
+                                            <div id="subject-error" class="invalid-feedback" role="alert"></div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Message <span class="text-danger" aria-label="required">*</span></label>
+                                            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Describe your cybersecurity needs or project requirements" required aria-required="true" aria-describedby="message-error"></textarea>
+                                            <div id="message-error" class="invalid-feedback" role="alert"></div>
+                                        </div>
+                                        
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary" aria-describedby="submit-instructions">
+                                                <i class="fas fa-star me-2" aria-hidden="true"></i>
+                                                Send Message
+                                                <i class="fas fa-times ms-2" aria-hidden="true"></i>
+                                            </button>
+                                            <div id="submit-instructions" class="visually-hidden">Press Enter to submit the contact form</div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Contact Information -->
-                        <div class="col-lg-6">
-                            <div class="ps-lg-4">
-                                <h3 class="mb-4">Get in touch</h3>
-                                <p class="mb-4">Ready to start your next project? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
-                                
-                                <div class="mb-4">
-                                    <h5><i class="fas fa-map-marker-alt text-primary me-2"></i>Address</h5>
-                                    <p class="text-muted">123 Business Street<br>City, State 12345</p>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <h5><i class="fas fa-phone text-primary me-2"></i>Phone</h5>
-                                    <p class="text-muted">+1 (555) 123-4567</p>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <h5><i class="fas fa-envelope text-primary me-2"></i>Email</h5>
-                                    <p class="text-muted">info@figmadesign.com</p>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <h5><i class="fas fa-clock text-primary me-2"></i>Business Hours</h5>
-                                    <p class="text-muted">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
-                                </div>
-                                
-                                <!-- Arrow Icon -->
-                                <div class="arrow-icon d-inline-block">
-                                    <i class="fas fa-arrow-down"></i>
+                            
+                            <!-- Contact Information -->
+                            <div class="col-lg-6">
+                                <div class="ps-lg-4">
+                                    <h3 class="mb-4">Get in touch</h3>
+                                    <p class="mb-4">Ready to start your next cybersecurity project? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                                    
+                                    <div class="mb-4">
+                                        <h5><i class="fas fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>Address</h5>
+                                        <address class="text-muted">
+                                            123 Business Street<br>
+                                            City, State 12345
+                                        </address>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5><i class="fas fa-phone text-primary me-2" aria-hidden="true"></i>Phone</h5>
+                                        <p class="text-muted">
+                                            <a href="tel:+15551234567" aria-label="Call us at +1 (555) 123-4567">+1 (555) 123-4567</a>
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5><i class="fas fa-envelope text-primary me-2" aria-hidden="true"></i>Email</h5>
+                                        <p class="text-muted">
+                                            <a href="mailto:info@nodecracker.com" aria-label="Send email to info@nodecracker.com">info@nodecracker.com</a>
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <h5><i class="fas fa-clock text-primary me-2" aria-hidden="true"></i>Business Hours</h5>
+                                        <p class="text-muted">
+                                            Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                            Saturday: 10:00 AM - 4:00 PM
+                                        </p>
+                                    </div>
+                                    
+                                    <!-- Arrow Icon -->
+                                    <div class="arrow-icon d-inline-block" aria-hidden="true">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Map Section -->
-    <section class="py-5" style="background-color: #f8f9fa;">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center mb-4">
-                    <h3>Find us on the map</h3>
-                </div>
-                <div class="col-12">
-                    <div class="ratio ratio-21x9">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s150%20Park%20Row%2C%20New%20York%2C%20NY%2010007%2C%20USA!5e0!3m2!1sen!2s!4v1640991234567!5m2!1sen!2s" 
-                                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <!-- Map Section -->
+        <section class="py-5" style="background-color: #f8f9fa;" aria-labelledby="map-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        <h3 id="map-title">Find us on the map</h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="ratio ratio-21x9">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s150%20Park%20Row%2C%20New%20York%2C%20NY%2010007%2C%20USA!5e0!3m2!1sen!2s!4v1640991234567!5m2!1sen!2s" 
+                                    style="border:0;" allowfullscreen="" loading="lazy" title="NodeCracker office location on Google Maps" aria-label="Interactive map showing NodeCracker office location"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
-            <p class="mb-0">&copy; 2024 All rigts reserved by NodeCrackers.</p>
+            <p class="mb-0">&copy; 2024 All rights reserved by NodeCracker</p>
         </div>
     </footer>
 
@@ -169,13 +201,108 @@
             navLinks.forEach(link => {
                 if (link.getAttribute('href') === currentPage) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
                 }
             });
         });
 
+        // Enhanced form validation and submission handling
+        const form = document.getElementById('contactForm');
+        const formFields = ['name', 'email', 'subject', 'message'];
+
+        // Real-time validation
+        formFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + '-error');
+            
+            field.addEventListener('blur', function() {
+                validateField(field, errorDiv);
+            });
+            
+            field.addEventListener('input', function() {
+                if (field.classList.contains('is-invalid')) {
+                    validateField(field, errorDiv);
+                }
+            });
+        });
+
+        function validateField(field, errorDiv) {
+            const value = field.value.trim();
+            let isValid = true;
+            let errorMessage = '';
+
+            // Remove existing validation classes
+            field.classList.remove('is-valid', 'is-invalid');
+
+            // Required field validation
+            if (!value) {
+                isValid = false;
+                errorMessage = 'This field is required.';
+            } else {
+                // Email-specific validation
+                if (field.type === 'email') {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address.';
+                    }
+                }
+                
+                // Name validation (minimum 2 characters)
+                if (field.id === 'name' && value.length < 2) {
+                    isValid = false;
+                    errorMessage = 'Name must be at least 2 characters long.';
+                }
+                
+                // Subject validation (minimum 5 characters)
+                if (field.id === 'subject' && value.length < 5) {
+                    isValid = false;
+                    errorMessage = 'Subject must be at least 5 characters long.';
+                }
+                
+                // Message validation (minimum 10 characters)
+                if (field.id === 'message' && value.length < 10) {
+                    isValid = false;
+                    errorMessage = 'Message must be at least 10 characters long.';
+                }
+            }
+
+            // Apply validation result
+            if (isValid) {
+                field.classList.add('is-valid');
+                errorDiv.textContent = '';
+                errorDiv.style.display = 'none';
+            } else {
+                field.classList.add('is-invalid');
+                errorDiv.textContent = errorMessage;
+                errorDiv.style.display = 'block';
+            }
+
+            return isValid;
+        }
+
         // Form submission handling
-        document.querySelector('form').addEventListener('submit', function(e) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Validate all fields
+            let allValid = true;
+            formFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const errorDiv = document.getElementById(fieldId + '-error');
+                if (!validateField(field, errorDiv)) {
+                    allValid = false;
+                }
+            });
+            
+            if (!allValid) {
+                // Focus on first invalid field
+                const firstInvalid = form.querySelector('.is-invalid');
+                if (firstInvalid) {
+                    firstInvalid.focus();
+                }
+                return;
+            }
             
             // Get form data
             const formData = new FormData(this);
@@ -184,15 +311,27 @@
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
-            // Simple validation
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields');
-                return;
-            }
+            // Simulate form submission with accessibility announcement
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'alert alert-success mt-3';
+            announcement.textContent = 'Thank you for your message! We will get back to you soon.';
+            form.appendChild(announcement);
             
-            // Simulate form submission
-            alert('Thank you for your message! We will get back to you soon.');
+            // Reset form
             this.reset();
+            formFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                field.classList.remove('is-valid', 'is-invalid');
+            });
+            
+            // Remove announcement after 5 seconds
+            setTimeout(() => {
+                if (announcement.parentNode) {
+                    announcement.parentNode.removeChild(announcement);
+                }
+            }, 5000);
         });
 
         // Smooth scrolling for anchor links
@@ -205,8 +344,22 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    // Focus management for accessibility
+                    target.focus();
                 }
             });
+        });
+
+        // Skip to main content keyboard shortcut
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                const main = document.querySelector('main');
+                if (main) {
+                    main.focus();
+                    main.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
         });
     </script>
 </body>

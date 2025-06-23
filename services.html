@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Figma Design Website</title>
+    <meta name="description" content="Explore NodeCracker's portfolio of cybersecurity projects and GitHub repositories. View real projects showcasing security expertise and technical skills.">
+    <meta name="keywords" content="cybersecurity projects, GitHub portfolio, security projects, NodeCracker projects, hacking projects">
+    <meta name="author" content="NodeCracker Team">
+    <title>My Projects - NodeCracker Portfolio | Cybersecurity Projects</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -12,78 +15,89 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f0f0f;">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="assets\s_logo_w.png" alt="Logo" height="37">
-            </a>
-            
-            <!-- Mobile Toggle Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- Navigation Menu -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Services Hero Section -->
-    <section class="hero-section-secondary">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="hero-title">My Projects</h1>
-                    <p class="hero-subtitle">Real projects from my GitHub portfolio</p>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0f0f0f;" role="navigation" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand" href="index.html" aria-label="NodeCracker - Go to homepage">
+                    <img src="assets\s_logo_w.png" alt="NodeCracker logo" height="37" width="67">
+                </a>
+                
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation menu">
+                    <span class="navbar-toggler-icon" aria-hidden="true"></span>
+                </button>
+                
+                <!-- Navigation Menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto" role="menubar">
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="index.html" role="menuitem">Home</a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link active" href="services.html" role="menuitem" aria-current="page">My Projects</a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="about.html" role="menuitem">About Us</a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a class="nav-link" href="contact.html" role="menuitem">Contact</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
+    </header>
 
-    <!-- Services Cards Section -->
-    <section class="services-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card-carousel position-relative">
-                        <!-- Carousel Controls -->
-                        <button class="carousel-controls prev" onclick="changeCard(-1)">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="carousel-controls next" onclick="changeCard(1)">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        
-                        <!-- Services Cards -->
-                        <div class="row g-4" id="servicesCarousel">
-                            <!-- Loading state -->
-                            <div class="col-12 text-center">
-                                <div class="service-card">
-                                    <div class="service-icon">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </div>
-                                    <h3 class="service-title">Loading Projects...</h3>
-                                    <p class="service-description">Fetching your latest GitHub projects to showcase your work.</p>
-                                    <div class="mt-3">
-                                        <span class="badge bg-secondary me-2">Loading</span>
-                                        <span class="badge bg-secondary me-2">GitHub</span>
-                                        <span class="badge bg-secondary">Projects</span>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Projects Hero Section -->
+        <section class="hero-section-secondary" aria-labelledby="projects-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 id="projects-title" class="hero-title">My Projects</h1>
+                        <p class="hero-subtitle">Real projects from my GitHub portfolio showcasing cybersecurity expertise</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Cards Section -->
+        <section class="services-section" aria-labelledby="projects-section-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 id="projects-section-title" class="visually-hidden">GitHub Projects Portfolio</h2>
+                        <div class="card-carousel position-relative" role="region" aria-label="Projects carousel">
+                            <!-- Carousel Controls -->
+                            <button class="carousel-controls prev" onclick="changeCard(-1)" aria-label="View previous project" aria-describedby="carousel-description">
+                                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                            </button>
+                            <button class="carousel-controls next" onclick="changeCard(1)" aria-label="View next project" aria-describedby="carousel-description">
+                                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                            </button>
+                            
+                            <div id="carousel-description" class="visually-hidden">Use the arrow buttons to navigate through the projects carousel</div>
+                            
+                            <!-- Projects Cards -->
+                            <div class="row g-4" id="servicesCarousel" role="list" aria-label="GitHub projects list">
+                                <!-- Loading state -->
+                                <div class="col-12 text-center" role="listitem">
+                                    <div class="service-card" aria-live="polite" aria-label="Loading projects">
+                                        <div class="service-icon">
+                                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                                        </div>
+                                        <h3 class="service-title">Loading Projects...</h3>
+                                        <p class="service-description">Fetching your latest GitHub projects to showcase your work.</p>
+                                        <div class="mt-3">
+                                            <span class="badge bg-secondary me-2">Loading</span>
+                                            <span class="badge bg-secondary me-2">GitHub</span>
+                                            <span class="badge bg-secondary">Projects</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -91,30 +105,30 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Call to Action -->
-    <section class="py-5" style="background-color: #f8f9fa;">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-12">
-                    <h2 class="mb-4">Ready to Get Started?</h2>
-                    <p class="lead mb-4">Let's discuss how we can help bring your vision to life.</p>
-                    <a href="contact.html" class="btn btn-primary btn-lg">
-                        <i class="fas fa-star me-2"></i>
-                        Contact Us Today
-                        <i class="fas fa-times ms-2"></i>
-                    </a>
+        <!-- Call to Action -->
+        <section class="py-5" style="background-color: #f8f9fa;" aria-labelledby="cta-title">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h2 id="cta-title" class="mb-4">Ready to Get Started?</h2>
+                        <p class="lead mb-4">Let's discuss how we can help bring your cybersecurity vision to life.</p>
+                        <a href="contact.html" class="btn btn-primary btn-lg" role="button" aria-label="Contact NodeCracker team to discuss your project">
+                            <i class="fas fa-star me-2" aria-hidden="true"></i>
+                            Contact Us Today
+                            <i class="fas fa-times ms-2" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
-            <p class="mb-0">&copy; 2024 All rigts reserved by NodeCrackers.</p>
+            <p class="mb-0">&copy; 2024 All rights reserved by NodeCracker</p>
         </div>
     </footer>
 
@@ -134,6 +148,7 @@
             navLinks.forEach(link => {
                 if (link.getAttribute('href') === currentPage) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
                 }
             });
         });
@@ -148,11 +163,13 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    // Focus management for accessibility
+                    target.focus();
                 }
             });
         });
 
-        // Card carousel functionality
+        // Card carousel functionality with accessibility improvements
         let currentCardIndex = 0;
         const cards = document.querySelectorAll('.service-card');
         const totalCards = cards.length;
@@ -166,22 +183,66 @@
                 currentCardIndex = totalCards - 1;
             }
             
-            // Update visibility (simple implementation)
+            // Update visibility and accessibility
             cards.forEach((card, index) => {
                 if (index === currentCardIndex) {
                     card.style.opacity = '1';
                     card.style.transform = 'scale(1.05)';
+                    card.setAttribute('aria-hidden', 'false');
+                    card.setAttribute('tabindex', '0');
                 } else {
                     card.style.opacity = '0.7';
                     card.style.transform = 'scale(1)';
+                    card.setAttribute('aria-hidden', 'true');
+                    card.setAttribute('tabindex', '-1');
                 }
             });
+
+            // Announce current card to screen readers
+            const currentCard = cards[currentCardIndex];
+            if (currentCard) {
+                const cardTitle = currentCard.querySelector('.service-title');
+                if (cardTitle) {
+                    const announcement = document.createElement('div');
+                    announcement.setAttribute('aria-live', 'polite');
+                    announcement.setAttribute('aria-atomic', 'true');
+                    announcement.className = 'visually-hidden';
+                    announcement.textContent = `Now viewing: ${cardTitle.textContent}`;
+                    document.body.appendChild(announcement);
+                    setTimeout(() => {
+                        document.body.removeChild(announcement);
+                    }, 1000);
+                }
+            }
         }
 
         // Initialize carousel
         document.addEventListener('DOMContentLoaded', function() {
             if (cards.length > 0) {
                 changeCard(0);
+            }
+        });
+
+        // Keyboard navigation for carousel
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeCard(-1);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                changeCard(1);
+            }
+        });
+
+        // Skip to main content keyboard shortcut
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                const main = document.querySelector('main');
+                if (main) {
+                    main.focus();
+                    main.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     </script>

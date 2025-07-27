@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Mapa de Calor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .heatmap-area {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        #heatmap-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .status {
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+    </style>
+    
+    <!-- Heatmap.js -->
+    <script src="https://cdn.jsdelivr.net/npm/heatmap.js@2.0.5/build/heatmap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Prueba del Mapa de Calor</h1>
+        <p>Esta página es una prueba simple para verificar que el mapa de calor funciona correctamente.</p>
+        
+        <div class="status">
+            <strong>Estado:</strong> <span id="status">Inicializando...</span>
+        </div>
+        
+        <div class="controls">
+            <button onclick="addRandomPoint()">Agregar Punto Aleatorio</button>
+            <button onclick="clearHeatmap()">Limpiar Mapa</button>
+            <button onclick="addTestPattern()">Patrón de Prueba</button>
+        </div>
+        
+        <div class="heatmap-area">
+            <div id="heatmap-canvas"></div>
+        </div>
+        
+        <div class="status">
+            <strong>Puntos:</strong> <span id="point-count">0</span> |
+            <strong>Máximo valor:</strong> <span id="max-value">0</span>
+        </div>
+    </div>
+
+    <script>
+        let heatmapInstance = null;
+        let points = [];
+        
+        // Inicializar mapa de calor
+        function initHeatmap() {
+            try {
+                const config = {
+                    container: document.getElementById('heatmap-canvas'),
+                    radius: 50,
+                    maxOpacity: 0.8,
+                    minOpacity: 0.1,
+                    blur: 0.75,
+                    gradient: {
+                        '.2': 'blue',
+                        '.4': 'green',
+                        '.6': 'yellow',
+                        '.8': 'orange',
+                        '.95': 'red'
+                    }
+                };
+                
+                heatmapInstance = h337.create(config);
+                document.getElementById('status').textContent = 'Mapa de calor inicializado';
+                console.log('Mapa de calor inicializado correctamente');
+                
+                // Agregar algunos puntos de prueba
+                addTestPattern();
+                
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+                console.error('Error al inicializar el mapa de calor:', error);
+            }
+        }
+        
+        // Agregar punto aleatorio
+        function addRandomPoint() {
+            if (!heatmapInstance) return;
+            
+            const x = Math.random() * 400;
+            const y = Math.random() * 400;
+            const value = Math.random() * 100;
+            
+            points.push({ x, y, value });
+            updateHeatmap();
+            updateStatus();
+            
+            console.log(`Punto agregado: (${Math.round(x)}, ${Math.round(y)}) - Valor: ${Math.round(value)}`);
+        }
+        
+        // Agregar patrón de prueba
+        function addTestPattern() {
+            if (!heatmapInstance) return;
+            
+            points = [
+                { x: 100, y: 100, value: 50 },
+                { x: 200, y: 150, value: 80 },
+                { x: 300, y: 200, value: 30 },
+                { x: 150, y: 300, value: 90 },
+                { x: 250, y: 100, value: 60 }
+            ];
+            
+            updateHeatmap();
+            updateStatus();
+            console.log('Patrón de prueba agregado');
+        }
+        
+        // Limpiar mapa
+        function clearHeatmap() {
+            if (!heatmapInstance) return;
+            
+            points = [];
+            updateHeatmap();
+            updateStatus();
+            console.log('Mapa de calor limpiado');
+        }
+        
+        // Actualizar mapa de calor
+        function updateHeatmap() {
+            if (!heatmapInstance) return;
+            
+            const data = {
+                max: 100,
+                data: points
+            };
+            
+            heatmapInstance.setData(data);
+        }
+        
+        // Actualizar estado
+        function updateStatus() {
+            document.getElementById('point-count').textContent = points.length;
+            
+            const maxValue = points.length > 0 ? Math.max(...points.map(p => p.value)) : 0;
+            document.getElementById('max-value').textContent = Math.round(maxValue);
+        }
+        
+        // Agregar puntos al hacer clic
+        document.querySelector('.heatmap-area').addEventListener('click', function(e) {
+            if (!heatmapInstance) return;
+            
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const value = 50 + Math.random() * 50; // Valor entre 50 y 100
+            
+            points.push({ x, y, value });
+            updateHeatmap();
+            updateStatus();
+            
+            console.log(`Clic en: (${Math.round(x)}, ${Math.round(y)}) - Valor: ${Math.round(value)}`);
+        });
+        
+        // Inicializar cuando se cargue la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Esperar a que Heatmap.js se cargue
+            let attempts = 0;
+            const maxAttempts = 50;
+            
+            const checkHeatmap = () => {
+                attempts++;
+                
+                if (typeof h337 !== 'undefined') {
+                    initHeatmap();
+                } else if (attempts >= maxAttempts) {
+                    document.getElementById('status').textContent = 'Error: No se pudo cargar Heatmap.js';
+                } else {
+                    setTimeout(checkHeatmap, 100);
+                }
+            };
+            
+            checkHeatmap();
+        });
+    </script>
+</body>
+</html> 

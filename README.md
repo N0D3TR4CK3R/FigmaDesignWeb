@@ -5,10 +5,18 @@ Un portafolio web responsivo y accesible que muestra la experiencia de NodeCrack
 ## Características Principales
 
 ### Funcionalidad Básica
-- **Sitio Web Multi-página**: Páginas de Inicio, Proyectos, Acerca de Nosotros y Contacto
+- **Sitio Web Multi-página**: Páginas de Inicio, Proyectos, Acerca de Nosotros, Contacto y Mapa de Calor
 - **Muestra Dinámica de Proyectos**: Integración en tiempo real con la API de GitHub para mostrar proyectos del portafolio
 - **Diseño Responsivo**: Optimizado para todos los dispositivos y tamaños de pantalla
 - **Interfaz Moderna**: Diseño limpio y profesional con animaciones suaves
+
+### Mapa de Calor con Seguimiento Visual
+- **Seguimiento Visual en Tiempo Real**: Utiliza WebGazer.js para capturar la mirada del usuario desde la cámara
+- **Visualización de Mapa de Calor**: Integra Heatmap.js para representar las zonas más observadas
+- **Sistema de Calibración**: Permite calibrar el seguimiento visual para mayor precisión
+- **Estadísticas en Tiempo Real**: Muestra puntos registrados, tiempo activo, precisión y zona más activa
+- **Control de Seguimiento**: Botones para iniciar, detener y limpiar el mapa de calor
+- **Interfaz Intuitiva**: Panel de control flotante con indicadores de estado visual
 
 ### Características de Accesibilidad (Cumple WCAG 2.1 AA)
 - **HTML5 Semántico**: Uso correcto de `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
@@ -29,6 +37,8 @@ Un portafolio web responsivo y accesible que muestra la experiencia de NodeCrack
 - **JavaScript**: Características interactivas e integración con API de GitHub
 - **Font Awesome**: Biblioteca de iconos accesible
 - **API de GitHub**: Carga dinámica de proyectos
+- **WebGazer.js**: Seguimiento visual y eye tracking
+- **Heatmap.js**: Visualización de mapas de calor
 
 ## Estructura del Proyecto
 
@@ -38,6 +48,8 @@ FigmaDesing/
 ├── services.html       # Muestra de proyectos con API de GitHub
 ├── about.html          # Información del equipo y misión
 ├── contact.html        # Formulario de contacto con validación
+├── heatmap.html        # Página de mapa de calor con seguimiento visual
+├── heatmap.js          # Lógica del mapa de calor con WebGazer.js y Heatmap.js
 ├── styles.css          # Hoja de estilos principal con características de accesibilidad
 ├── github-api.js       # Integración con API de GitHub
 ├── assets/             # Imágenes y logos
@@ -56,6 +68,60 @@ FigmaDesing/
 - Etiquetas ARIA y roles para elementos interactivos
 - Texto alternativo descriptivo para todas las imágenes
 - Asociaciones de etiquetas y errores en formularios
+
+## Implementación del Mapa de Calor
+
+### Arquitectura Técnica
+
+#### Componentes Principales
+- **WebGazer.js**: Biblioteca de eye tracking que utiliza machine learning para predecir la posición de la mirada
+- **Heatmap.js**: Biblioteca para crear visualizaciones de mapas de calor interactivos
+- **HeatmapTracker Class**: Clase JavaScript personalizada que coordina ambas librerías
+
+#### Flujo de Datos
+1. **Captura de Video**: WebGazer.js accede a la cámara web del usuario
+2. **Procesamiento de Imagen**: Analiza los frames de video para detectar ojos y pupilas
+3. **Predicción de Mirada**: Utiliza modelos de ML para estimar dónde mira el usuario
+4. **Filtrado de Datos**: Se filtran puntos con baja confianza (< 30%)
+5. **Visualización**: Heatmap.js renderiza los puntos como un mapa de calor
+
+#### Características de Implementación
+
+##### Seguimiento Visual
+- **Frecuencia de muestreo**: Captura continua de puntos de mirada
+- **Filtrado de ruido**: Elimina puntos con baja confianza
+- **Coordenadas normalizadas**: Convierte coordenadas de WebGazer a coordenadas de pantalla
+- **Gestión de eventos**: Maneja eventos de redimensionamiento y visibilidad de página
+
+##### Sistema de Calibración
+- **5 puntos de calibración**: Esquinas y centro de la pantalla
+- **Interfaz visual**: Puntos rojos que aparecen secuencialmente
+- **Validación de clics**: Verifica que el usuario haga clic en el área correcta
+- **Mejora de precisión**: Los datos de calibración mejoran la precisión del seguimiento
+
+##### Visualización del Mapa de Calor
+- **Gradiente de colores**: Azul (frío) → Verde → Amarillo → Naranja → Rojo (caliente)
+- **Radio configurable**: 50px por defecto para cada punto
+- **Opacidad dinámica**: Varía según la intensidad de la actividad
+- **Efecto de desenfoque**: 0.75 para suavizar la visualización
+
+##### Estadísticas en Tiempo Real
+- **Contador de puntos**: Número total de puntos registrados
+- **Temporizador**: Tiempo transcurrido desde el inicio
+- **Precisión promedio**: Confianza media de todas las predicciones
+- **Análisis de zonas**: Identifica el cuadrante más observado
+
+#### Consideraciones de Rendimiento
+- **Optimización de memoria**: Limpieza automática de datos antiguos
+- **Gestión de recursos**: Pausa automática cuando la página no está visible
+- **Responsive design**: Adaptación a diferentes tamaños de pantalla
+- **Fallbacks**: Manejo de errores cuando las librerías no están disponibles
+
+#### Seguridad y Privacidad
+- **Procesamiento local**: Todos los datos se procesan en el navegador
+- **Sin almacenamiento**: No se guardan datos en servidores externos
+- **Permisos explícitos**: Requiere consentimiento del usuario para acceder a la cámara
+- **Transparencia**: Información clara sobre qué datos se recopilan
 
 ### Navegación por Teclado
 - Navegación con Tab a través de todos los elementos interactivos
@@ -120,6 +186,66 @@ FigmaDesing/
 3. **Desarrollo local**:
    - Usa un servidor local para mejor experiencia
    - Recomendado: Extensión Live Server en VS Code
+
+## Uso del Mapa de Calor
+
+### Requisitos Previos
+- **Navegador compatible**: Chrome, Firefox, Safari o Edge (última versión)
+- **Cámara web**: Requerida para el seguimiento visual
+- **Permisos de cámara**: El navegador debe permitir acceso a la cámara
+- **Conexión a internet**: Para cargar las librerías WebGazer.js y Heatmap.js
+
+### Instrucciones de Uso
+
+1. **Acceder al Mapa de Calor**:
+   - Navega a la página "Mapa de Calor" desde el menú principal
+   - La página se encuentra en `heatmap.html`
+
+2. **Iniciar el Seguimiento**:
+   - Haz clic en "Iniciar Seguimiento"
+   - Permite el acceso a la cámara cuando el navegador lo solicite
+   - El sistema comenzará a registrar tu mirada
+
+3. **Calibración (Opcional)**:
+   - Haz clic en "Calibrar" para mejorar la precisión
+   - Sigue las instrucciones en pantalla
+   - Haz clic en cada punto rojo que aparezca
+
+4. **Navegar y Observar**:
+   - Mueve tu mirada por la página
+   - El sistema registrará automáticamente los puntos donde miras
+   - Observa las estadísticas en tiempo real
+
+5. **Detener y Ver Resultados**:
+   - Haz clic en "Detener Seguimiento"
+   - Se mostrará un resumen de los resultados
+   - El mapa de calor permanecerá visible
+
+6. **Limpiar y Reiniciar**:
+   - Usa "Limpiar Mapa" para borrar los datos
+   - Puedes reiniciar el seguimiento en cualquier momento
+
+### Características del Panel de Control
+
+- **Indicador de Estado**: Muestra si el seguimiento está activo o inactivo
+- **Botón Iniciar**: Comienza el seguimiento visual
+- **Botón Detener**: Pausa el seguimiento y muestra resultados
+- **Botón Calibrar**: Mejora la precisión del seguimiento
+- **Botón Limpiar**: Borra todos los datos del mapa
+
+### Panel de Estadísticas
+
+- **Puntos registrados**: Número total de puntos de mirada capturados
+- **Tiempo activo**: Duración del seguimiento en formato MM:SS
+- **Precisión**: Porcentaje promedio de confianza del seguimiento
+- **Zona más activa**: Cuadrante de la pantalla más observado
+
+### Consideraciones Importantes
+
+- **Privacidad**: Los datos se procesan localmente y no se envían a servidores externos
+- **Precisión**: La precisión depende de la iluminación, posición de la cámara y calibración
+- **Rendimiento**: El seguimiento puede consumir recursos del sistema
+- **Compatibilidad**: Funciona mejor en navegadores modernos con soporte para WebRTC
 
 ## Soporte de Navegadores
 
@@ -211,6 +337,17 @@ Optimizados para impresión con:
 ## Demo en Vivo
 
 Visita el sitio web en vivo: [Portafolio NodeCracker](https://n0d3tr4ck3r.github.io/FigmaDesignWeb/)
+
+### Ubicación del Mapa de Calor
+
+El mapa de calor se encuentra implementado en la página `heatmap.html` y es accesible desde el menú de navegación principal de todas las páginas del sitio. La implementación incluye:
+
+- **Página dedicada**: `heatmap.html` - Página completa con interfaz de mapa de calor
+- **Lógica JavaScript**: `heatmap.js` - Clase HeatmapTracker con toda la funcionalidad
+- **Integración**: Enlaces en la navegación de todas las páginas existentes
+- **Documentación**: Instrucciones detalladas en esta sección del README
+
+La implementación está diseñada para ser completamente funcional y lista para usar, requiriendo solo permisos de cámara del usuario para comenzar el seguimiento visual.
 
 ## Licencia
 

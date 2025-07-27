@@ -1,10 +1,12 @@
 {
   "name": "figma-design-website",
   "version": "1.0.0",
-  "description": "A responsive website built from Figma design",
+  "description": "A responsive website with heatmap eye tracking functionality",
   "main": "index.html",
   "scripts": {
-    "start": "live-server",
+    "start": "live-server --port=8000 --open=/heatmap.html",
+    "dev": "live-server --port=8000",
+    "serve": "http-server -p 8000",
     "build": "echo 'Build complete'"
   },
   "dependencies": {
@@ -12,9 +14,28 @@
     "@popperjs/core": "^2.11.8"
   },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
   },
-  "keywords": ["bootstrap", "figma", "responsive", "website"],
-  "author": "",
-  "license": "MIT"
+  "keywords": [
+    "bootstrap", 
+    "figma", 
+    "responsive", 
+    "website", 
+    "heatmap", 
+    "eye-tracking", 
+    "webgazer", 
+    "heatmap.js"
+  ],
+  "author": "NodeCracker Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/n0d3tr4ck3r/FigmaDesignWeb.git"
+  },
+  "homepage": "https://n0d3tr4ck3r.github.io/FigmaDesignWeb/",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
 } 

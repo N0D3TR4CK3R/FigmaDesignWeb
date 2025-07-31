@@ -2,21 +2,29 @@
 
 Un portafolio web responsivo y accesible que muestra la experiencia de NodeCracker en soluciones tecnológicas seguras y desarrollo de cultura de seguridad.
 
-## Características Principales
+## ¿Qué hace el proyecto?
 
-### Funcionalidad Básica
+Este proyecto es un **portafolio web completo** que incluye:
+
+### Funcionalidad Principal
 - **Sitio Web Multi-página**: Páginas de Inicio, Proyectos, Acerca de Nosotros, Contacto y Mapa de Calor
 - **Muestra Dinámica de Proyectos**: Integración en tiempo real con la API de GitHub para mostrar proyectos del portafolio
 - **Diseño Responsivo**: Optimizado para todos los dispositivos y tamaños de pantalla
 - **Interfaz Moderna**: Diseño limpio y profesional con animaciones suaves
 
-### Mapa de Calor con Seguimiento Visual
+### Mapa de Calor con Seguimiento Visual (Característica Destacada)
 - **Seguimiento Visual en Tiempo Real**: Utiliza WebGazer.js para capturar la mirada del usuario desde la cámara
 - **Visualización de Mapa de Calor**: Integra Heatmap.js para representar las zonas más observadas
 - **Sistema de Calibración**: Permite calibrar el seguimiento visual para mayor precisión
 - **Estadísticas en Tiempo Real**: Muestra puntos registrados, tiempo activo, precisión y zona más activa
 - **Control de Seguimiento**: Botones para iniciar, detener y limpiar el mapa de calor
 - **Interfaz Intuitiva**: Panel de control flotante con indicadores de estado visual
+
+#### Demostración del Funcionamiento
+
+![Seguimiento Visual en Acción](assets/Screenshot%202025-07-31%20183011.png)
+
+*Captura de pantalla mostrando el sistema de seguimiento visual funcionando en tiempo real con el mapa de calor activo.*
 
 ### Características de Accesibilidad (Cumple WCAG 2.1 AA)
 - **HTML5 Semántico**: Uso correcto de `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
@@ -29,16 +37,85 @@ Un portafolio web responsivo y accesible que muestra la experiencia de NodeCrack
 - **Soporte para Modo Oscuro**: Detección automática y estilos para modo oscuro
 - **Estilos de Impresión**: Experiencia de impresión optimizada
 
-## Tecnologías Utilizadas
+## Cómo ejecutarlo
 
+### Instalación y Configuración
+
+1. **Clonar el repositorio**:
+   ```bash
+   git clone [url-del-repositorio]
+   cd FigmaDesignWeb
+   ```
+
+2. **Abrir en navegador**:
+   - Simplemente abre `index.html` en cualquier navegador web moderno
+   - No se requiere proceso de construcción - HTML, CSS y JavaScript puros
+
+3. **Desarrollo local** (recomendado):
+   - Usa un servidor local para mejor experiencia
+   - Recomendado: Extensión Live Server en VS Code
+   - O ejecuta: `python -m http.server 8000` y visita `http://localhost:8000`
+
+### Requisitos del Sistema
+- **Navegador compatible**: Chrome, Firefox, Safari o Edge (última versión)
+- **Cámara web**: Requerida para el seguimiento visual (solo en la página de mapa de calor)
+- **Permisos de cámara**: El navegador debe permitir acceso a la cámara
+- **Conexión a internet**: Para cargar las librerías WebGazer.js y Heatmap.js
+
+## Qué librerías utiliza
+
+### Librerías Principales
+- **Bootstrap 5.3.2**: Framework CSS responsivo para el diseño y componentes
+- **Font Awesome**: Biblioteca de iconos para mejorar la interfaz visual
+- **WebGazer.js**: Librería de eye tracking que utiliza machine learning para predecir la posición de la mirada
+- **Heatmap.js (h337)**: Biblioteca para crear visualizaciones de mapas de calor interactivos
+
+### Tecnologías Web
 - **HTML5**: Marcado semántico con características de accesibilidad
 - **CSS3**: Estilos modernos con consideraciones de accesibilidad
-- **Bootstrap 5**: Framework responsivo con mejoras de accesibilidad personalizadas
-- **JavaScript**: Características interactivas e integración con API de GitHub
-- **Font Awesome**: Biblioteca de iconos accesible
-- **API de GitHub**: Carga dinámica de proyectos
-- **WebGazer.js**: Seguimiento visual y eye tracking
-- **Heatmap.js**: Visualización de mapas de calor
+- **JavaScript ES6+**: Características interactivas e integración con APIs
+- **API de GitHub**: Carga dinámica de proyectos del portafolio
+
+### Dependencias de Desarrollo
+- **Node.js**: Para gestión de dependencias (opcional)
+- **npm**: Gestor de paquetes (opcional)
+
+## Cómo calibrar el seguimiento visual
+
+### Proceso de Calibración
+
+El sistema de seguimiento visual incluye un **sistema de calibración** que mejora significativamente la precisión del eye tracking:
+
+#### 1. Acceder a la Calibración
+- Navega a la página "Mapa de Calor" desde el menú principal
+- Haz clic en el botón **"Calibrar"** en el panel de control
+
+#### 2. Proceso de Calibración
+- Se mostrará una **zona rectangular central** (70% del tamaño de la página)
+- Aparecerán **puntos rojos** secuencialmente en diferentes posiciones
+- **Haz clic en cada punto rojo** que aparezca en la pantalla
+- El sistema registrará tu clic para calibrar la precisión del seguimiento
+
+#### 3. Puntos de Calibración
+- **9 puntos de calibración** distribuidos estratégicamente
+- Puntos en las esquinas, bordes y centro del área de seguimiento
+- Cada clic mejora la precisión del modelo de predicción
+
+#### 4. Indicadores de Progreso
+- **Barra de progreso** que muestra el avance de la calibración
+- **Contador** de puntos completados vs. total de puntos
+- **Instrucciones claras** en pantalla durante el proceso
+
+#### 5. Beneficios de la Calibración
+- **Mayor precisión** en el seguimiento de la mirada
+- **Mejor rendimiento** del mapa de calor
+- **Estadísticas más confiables** de las zonas observadas
+
+### Consejos para una Calibración Exitosa
+- **Buena iluminación**: Asegúrate de tener buena luz en tu rostro
+- **Posición estable**: Mantén una distancia constante de la cámara
+- **Clics precisos**: Haz clic exactamente en el centro de cada punto rojo
+- **Paciencia**: Completa todos los puntos de calibración para mejores resultados
 
 ## Estructura del Proyecto
 

@@ -22,6 +22,21 @@
     <script src="https://cdn.jsdelivr.net/npm/heatmap.js@2.0.5/build/heatmap.min.js"></script>
     
     <style>
+        :root {
+            --primary-color: #02AD84;
+            --secondary-color: #D8FA19;
+            --dark-color: #0F0F0F;
+            --light-color: #FEFFFE;
+            --accent-color: #8CDDC6;
+            --text-dark: #0F0F0F;
+            --text-muted: #757575;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
         .heatmap-container {
             position: relative;
             width: 100%;
@@ -67,7 +82,7 @@
         }
         
         .btn-heatmap {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
             border: none;
             color: white;
             padding: 0.75rem 1.5rem;
@@ -79,14 +94,16 @@
         
         .btn-heatmap:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(2, 173, 132, 0.3);
             color: white;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
         }
         
         .btn-heatmap:disabled {
             background: #6c757d;
             transform: none;
             box-shadow: none;
+            opacity: 0.6;
         }
         
         .status-indicator {
@@ -98,7 +115,7 @@
         }
         
         .status-active {
-            background-color: #28a745;
+            background-color: var(--primary-color);
             animation: pulse 2s infinite;
         }
         
@@ -130,13 +147,14 @@
             bottom: 20px;
             left: 20px;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(15, 15, 15, 0.9);
             border-radius: 10px;
             padding: 10px;
             backdrop-filter: blur(10px);
             display: none;
             text-align: center;
             min-width: 220px;
+            border: 1px solid rgba(2, 173, 132, 0.3);
         }
         
         .webgazer-video {
@@ -158,12 +176,12 @@
             bottom: 20px;
             right: 20px;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(15, 15, 15, 0.9);
             padding: 1rem;
             border-radius: 10px;
             color: white;
             backdrop-filter: blur(10px);
-            min-width: 200px;
+            border: 1px solid rgba(2, 173, 132, 0.3);
         }
         
         .stats-item {
@@ -288,14 +306,14 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
             z-index: 1000;
+            background: rgba(15, 15, 15, 0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(2, 173, 132, 0.3);
             display: none;
-            min-width: 300px;
         }
 
         .calibration-info h3 {
@@ -330,10 +348,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            background: rgba(15, 15, 15, 0.9);
             color: white;
+            padding: 2rem;
+            border-radius: 15px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(2, 173, 132, 0.3);
             z-index: 10;
-            pointer-events: none;
         }
 
         .tracking-indicator h4 {

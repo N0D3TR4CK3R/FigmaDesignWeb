@@ -299,34 +299,6 @@ class HeatmapTracker {
         this.calibrateButton.addEventListener('click', () => this.startCalibration());
         this.clearButton.addEventListener('click', () => this.clearHeatmap());
         
-        // Agregar botón de prueba para simular puntos
-        const testButton = document.createElement('button');
-        testButton.textContent = 'Probar Puntos';
-        testButton.className = 'btn btn-heatmap';
-        testButton.style.margin = '0.5rem';
-        testButton.addEventListener('click', () => this.simulateGazePoints());
-        
-        // Agregar botón de diagnóstico
-        const diagnoseButton = document.createElement('button');
-        diagnoseButton.textContent = 'Diagnóstico';
-        diagnoseButton.className = 'btn btn-heatmap';
-        diagnoseButton.style.margin = '0.5rem';
-        diagnoseButton.addEventListener('click', () => this.diagnoseSystem());
-        
-        // Agregar botón para forzar actualización de estadísticas
-        const forceUpdateButton = document.createElement('button');
-        forceUpdateButton.textContent = 'Actualizar Stats';
-        forceUpdateButton.className = 'btn btn-heatmap';
-        forceUpdateButton.style.margin = '0.5rem';
-        forceUpdateButton.addEventListener('click', () => this.forceUpdateStats());
-        
-        // Insertar después del botón de limpiar
-        if (this.clearButton && this.clearButton.parentNode) {
-            this.clearButton.parentNode.insertBefore(testButton, this.clearButton.nextSibling);
-            this.clearButton.parentNode.insertBefore(diagnoseButton, testButton.nextSibling);
-            this.clearButton.parentNode.insertBefore(forceUpdateButton, diagnoseButton.nextSibling);
-        }
-        
         // Eventos de calibración
         this.calibrationDots.forEach((dot, index) => {
             if (dot) {
@@ -407,76 +379,7 @@ class HeatmapTracker {
             });
         }
         
-        // Forzar actualización de estadísticas
-        this.forceUpdateStats();
-        
         console.log('=== FIN DEL DIAGNÓSTICO ===');
-    }
-
-    // Forzar actualización de estadísticas
-    forceUpdateStats() {
-        console.log('Forzando actualización de estadísticas...');
-        
-        // Actualizar contador de puntos manualmente
-        if (this.pointsCount) {
-            this.pointsCount.textContent = this.points.length;
-            console.log('Contador de puntos forzado a:', this.points.length);
-        }
-        
-        // Actualizar tiempo activo
-        if (this.startTime && this.activeTime) {
-            const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = elapsed % 60;
-            this.activeTime.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            console.log('Tiempo activo forzado a:', this.activeTime.textContent);
-        }
-        
-        // Actualizar precisión
-        if (this.points.length > 0 && this.accuracy) {
-            const avgConfidence = this.points.reduce((sum, point) => sum + point.value, 0) / this.points.length;
-            this.accuracy.textContent = `${Math.round(avgConfidence)}%`;
-            console.log('Precisión forzada a:', this.accuracy.textContent);
-        } else if (this.accuracy) {
-            this.accuracy.textContent = '0%';
-            console.log('Precisión forzada a 0%');
-        }
-        
-        // Mostrar panel de estadísticas
-        if (this.statsPanel) {
-            this.statsPanel.style.display = 'block';
-            console.log('Panel de estadísticas forzado a mostrar');
-        }
-        
-        console.log('Actualización de estadísticas forzada completada');
-    }
-
-    // Función para simular puntos de seguimiento (para pruebas)
-    simulateGazePoints() {
-        console.log('Simulando puntos de seguimiento...');
-        
-        if (!this.trackingArea) {
-            console.error('No se encontró el área de seguimiento');
-            return;
-        }
-        
-        const trackingRect = this.trackingArea.getBoundingClientRect();
-        console.log('Área de seguimiento para simulación:', trackingRect);
-        
-        // Simular algunos puntos dentro del área de seguimiento
-        for (let i = 0; i < 10; i++) {
-            // Generar coordenadas dentro del área de seguimiento
-            const x = trackingRect.left + Math.random() * trackingRect.width;
-            const y = trackingRect.top + Math.random() * trackingRect.height;
-            const confidence = 0.5 + Math.random() * 0.5; // Confianza entre 0.5 y 1.0
-            
-            console.log(`Simulando punto ${i + 1}: x=${x}, y=${y}, confidence=${confidence}`);
-            
-            // Llamar directamente a addGazePoint con coordenadas de pantalla
-            this.addGazePoint(x, y, confidence);
-        }
-        
-        console.log(`Simulación completada. Total puntos: ${this.points.length}`);
     }
 
     async startTracking() {

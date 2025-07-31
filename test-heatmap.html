@@ -3,235 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba Mapa de Calor</title>
+    <title>Prueba - Mapa de Calor Pong</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body {
             margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
+            padding: 0;
+            overflow: hidden;
         }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
+
+        .navbar {
+            background-color: #0f0f0f !important;
+            z-index: 1000;
         }
-        
-        .heatmap-area {
+
+        .heatmap-container {
             position: relative;
             width: 100%;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            margin: 20px 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        #heatmap-canvas {
+
+        /* Área de seguimiento central */
+        .tracking-area {
+            position: relative;
+            width: 70%;
+            height: 70%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .tracking-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            pointer-events: none;
+        }
+
+        /* Grid de cuadrados tipo Pong dentro del área de seguimiento */
+        .pong-grid {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 5;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 1px;
+            background: rgba(0, 0, 0, 0.1);
         }
-        
-        .controls {
-            text-align: center;
-            margin: 20px 0;
+
+        .grid-square {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        
-        button {
+
+        .grid-square:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .grid-square.clicked {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Puntos de calibración rojos dentro del área de seguimiento */
+        .calibration-dot {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff0000;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            z-index: 20;
+            display: none;
+            animation: pulse 1s infinite;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .calibration-dot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .control-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-heatmap {
             background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             border: none;
             color: white;
-            padding: 10px 20px;
+            padding: 0.75rem 1.5rem;
             border-radius: 25px;
-            margin: 5px;
-            cursor: pointer;
             font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
         }
-        
-        button:hover {
+
+        .btn-heatmap:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            color: white;
         }
-        
-        .status {
+
+        .calibration-info {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
             text-align: center;
-            margin: 10px 0;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .calibration-progress {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .calibration-progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            transition: width 0.3s ease;
+        }
+
+        /* Indicador del área de seguimiento */
+        .tracking-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .tracking-indicator h4 {
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .tracking-indicator p {
+            opacity: 0.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Ocultar indicador cuando esté activo */
+        .tracking-active .tracking-indicator {
+            display: none;
         }
     </style>
-    
-    <!-- Heatmap.js -->
-    <script src="https://cdn.jsdelivr.net/npm/heatmap.js@2.0.5/build/heatmap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>🧪 Prueba del Mapa de Calor</h1>
-        <p>Esta página es una prueba simple para verificar que el mapa de calor funciona correctamente.</p>
-        
-        <div class="status">
-            <strong>Estado:</strong> <span id="status">Inicializando...</span>
+    <!-- Header -->
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container">
+            <span class="navbar-brand">Prueba - Mapa de Calor Pong</span>
         </div>
-        
-        <div class="controls">
-            <button onclick="addRandomPoint()">Agregar Punto Aleatorio</button>
-            <button onclick="clearHeatmap()">Limpiar Mapa</button>
-            <button onclick="addTestPattern()">Patrón de Prueba</button>
-        </div>
-        
-        <div class="heatmap-area">
-            <div id="heatmap-canvas"></div>
-        </div>
-        
-        <div class="status">
-            <strong>Puntos:</strong> <span id="point-count">0</span> |
-            <strong>Máximo valor:</strong> <span id="max-value">0</span>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="heatmap-container">
+        <!-- Área de seguimiento central -->
+        <div class="tracking-area" id="tracking-area">
+            <!-- Grid de cuadrados tipo Pong -->
+            <div class="pong-grid" id="pong-grid"></div>
+            
+            <!-- Puntos de calibración dinámicos -->
+            <div class="calibration-dot" id="calibration-dot-1"></div>
+            <div class="calibration-dot" id="calibration-dot-2"></div>
+            <div class="calibration-dot" id="calibration-dot-3"></div>
+            <div class="calibration-dot" id="calibration-dot-4"></div>
+            <div class="calibration-dot" id="calibration-dot-5"></div>
+            <div class="calibration-dot" id="calibration-dot-6"></div>
+            <div class="calibration-dot" id="calibration-dot-7"></div>
+            <div class="calibration-dot" id="calibration-dot-8"></div>
+            <div class="calibration-dot" id="calibration-dot-9"></div>
+            
+            <!-- Indicador del área de seguimiento -->
+            <div class="tracking-indicator" id="tracking-indicator">
+                <h4><i class="fas fa-eye me-2"></i>Área de Seguimiento</h4>
+                <p>Haz clic en "Crear Grid" para comenzar</p>
+            </div>
         </div>
     </div>
 
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <h6 class="mb-3">Panel de Control</h6>
+        <button id="create-grid" class="btn btn-heatmap">
+            <i class="fas fa-th me-2"></i>Crear Grid
+        </button>
+        <button id="start-calibration" class="btn btn-heatmap">
+            <i class="fas fa-crosshairs me-2"></i>Iniciar Calibración
+        </button>
+        <button id="clear-grid" class="btn btn-heatmap">
+            <i class="fas fa-trash me-2"></i>Limpiar Grid
+        </button>
+    </div>
+
+    <!-- Información de Calibración -->
+    <div class="calibration-info" id="calibration-info">
+        <h3><i class="fas fa-crosshairs me-2"></i>Calibración en Progreso</h3>
+        <p>Haz clic en cada punto rojo que aparezca en el área de seguimiento para calibrar el seguimiento visual.</p>
+        <div class="calibration-progress">
+            <div class="calibration-progress-bar" id="calibration-progress-bar"></div>
+        </div>
+        <p id="calibration-status">Punto 1 de 9</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        let heatmapInstance = null;
-        let points = [];
-        
-        // Inicializar mapa de calor
-        function initHeatmap() {
-            try {
-                const config = {
-                    container: document.getElementById('heatmap-canvas'),
-                    radius: 50,
-                    maxOpacity: 0.8,
-                    minOpacity: 0.1,
-                    blur: 0.75,
-                    gradient: {
-                        '.2': 'blue',
-                        '.4': 'green',
-                        '.6': 'yellow',
-                        '.8': 'orange',
-                        '.95': 'red'
+        class PongGridTest {
+            constructor() {
+                this.gridSquares = [];
+                this.calibrationDots = [];
+                this.calibrationPoints = [
+                    { x: 0.1, y: 0.15 },   // Superior izquierdo
+                    { x: 0.5, y: 0.15 },   // Superior centro
+                    { x: 0.9, y: 0.15 },   // Superior derecho
+                    { x: 0.1, y: 0.5 },    // Centro izquierdo
+                    { x: 0.5, y: 0.5 },    // Centro
+                    { x: 0.9, y: 0.5 },    // Centro derecho
+                    { x: 0.1, y: 0.85 },   // Inferior izquierdo
+                    { x: 0.5, y: 0.85 },   // Inferior centro
+                    { x: 0.9, y: 0.85 }    // Inferior derecho
+                ];
+                this.currentCalibrationPoint = 0;
+                this.isCalibrating = false;
+                
+                this.initializeElements();
+                this.bindEvents();
+                this.createPongGrid();
+            }
+
+            initializeElements() {
+                this.pongGrid = document.getElementById('pong-grid');
+                this.trackingArea = document.getElementById('tracking-area');
+                this.trackingIndicator = document.getElementById('tracking-indicator');
+                
+                // Puntos de calibración
+                for (let i = 1; i <= 9; i++) {
+                    this.calibrationDots.push(document.getElementById(`calibration-dot-${i}`));
+                }
+
+                // Elementos de calibración
+                this.calibrationInfo = document.getElementById('calibration-info');
+                this.calibrationProgressBar = document.getElementById('calibration-progress-bar');
+                this.calibrationStatus = document.getElementById('calibration-status');
+            }
+
+            createPongGrid() {
+                if (!this.pongGrid || !this.trackingArea) return;
+                
+                // Limpiar grid existente
+                this.pongGrid.innerHTML = '';
+                this.gridSquares = [];
+                
+                // Calcular dimensiones del grid dentro del área de seguimiento
+                const gridSize = 40; // Tamaño de cada cuadrado
+                const trackingRect = this.trackingArea.getBoundingClientRect();
+                const containerWidth = trackingRect.width;
+                const containerHeight = trackingRect.height;
+                
+                const cols = Math.ceil(containerWidth / gridSize);
+                const rows = Math.ceil(containerHeight / gridSize);
+                
+                // Crear cuadrados del grid
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const square = document.createElement('div');
+                        square.className = 'grid-square';
+                        square.style.width = `${gridSize}px`;
+                        square.style.height = `${gridSize}px`;
+                        
+                        // Agregar evento de clic para interacción
+                        square.addEventListener('click', (e) => {
+                            this.handleGridSquareClick(e, square);
+                        });
+                        
+                        this.pongGrid.appendChild(square);
+                        this.gridSquares.push(square);
                     }
-                };
+                }
                 
-                heatmapInstance = h337.create(config);
-                document.getElementById('status').textContent = 'Mapa de calor inicializado';
-                console.log('Mapa de calor inicializado correctamente');
+                console.log(`Grid creado con ${cols}x${rows} cuadrados (${this.gridSquares.length} total) dentro del área de seguimiento`);
+            }
+
+            handleGridSquareClick(e, square) {
+                // Agregar efecto visual al cuadrado clickeado
+                square.classList.add('clicked');
+                setTimeout(() => {
+                    square.classList.remove('clicked');
+                }, 300);
                 
-                // Agregar algunos puntos de prueba
-                addTestPattern();
+                console.log('Cuadrado clickeado:', square);
+            }
+
+            startCalibration() {
+                this.isCalibrating = true;
+                this.currentCalibrationPoint = 0;
                 
-            } catch (error) {
-                document.getElementById('status').textContent = 'Error: ' + error.message;
-                console.error('Error al inicializar el mapa de calor:', error);
+                // Mostrar información de calibración
+                this.showCalibrationInfo();
+                
+                // Mostrar primer punto
+                this.showCalibrationDot();
+            }
+
+            showCalibrationInfo() {
+                if (this.calibrationInfo) {
+                    this.calibrationInfo.style.display = 'block';
+                }
+            }
+
+            hideCalibrationInfo() {
+                if (this.calibrationInfo) {
+                    this.calibrationInfo.style.display = 'none';
+                }
+            }
+
+            showCalibrationDot() {
+                if (this.currentCalibrationPoint >= this.calibrationPoints.length) {
+                    this.finishCalibration();
+                    return;
+                }
+                
+                // Ocultar todos los puntos
+                this.calibrationDots.forEach(dot => {
+                    if (dot) dot.style.display = 'none';
+                });
+                
+                // Mostrar el punto actual
+                const point = this.calibrationPoints[this.currentCalibrationPoint];
+                const dot = this.calibrationDots[this.currentCalibrationPoint];
+                
+                if (dot) {
+                    dot.style.left = `${point.x * 100}%`;
+                    dot.style.top = `${point.y * 100}%`;
+                    dot.style.display = 'block';
+                }
+                
+                // Actualizar progreso
+                this.updateCalibrationProgress();
+            }
+
+            updateCalibrationProgress() {
+                const progress = ((this.currentCalibrationPoint + 1) / this.calibrationPoints.length) * 100;
+                
+                if (this.calibrationProgressBar) {
+                    this.calibrationProgressBar.style.width = `${progress}%`;
+                }
+                
+                if (this.calibrationStatus) {
+                    this.calibrationStatus.textContent = `Punto ${this.currentCalibrationPoint + 1} de ${this.calibrationPoints.length}`;
+                }
+            }
+
+            handleCalibrationDotClick(e, dotIndex) {
+                if (dotIndex === this.currentCalibrationPoint) {
+                    console.log(`Punto de calibración ${dotIndex + 1} clickeado`);
+                    
+                    // Pasar al siguiente punto
+                    this.currentCalibrationPoint++;
+                    this.showCalibrationDot();
+                }
+            }
+
+            finishCalibration() {
+                this.isCalibrating = false;
+                
+                // Ocultar todos los puntos
+                this.calibrationDots.forEach(dot => {
+                    if (dot) dot.style.display = 'none';
+                });
+                
+                // Ocultar información de calibración
+                this.hideCalibrationInfo();
+                
+                alert('Calibración completada. El seguimiento visual debería ser más preciso ahora.');
+            }
+
+            clearGrid() {
+                this.gridSquares.forEach(square => {
+                    square.classList.remove('clicked');
+                });
+                console.log('Grid limpiado');
+            }
+
+            bindEvents() {
+                // Eventos de botones
+                document.getElementById('create-grid').addEventListener('click', () => this.createPongGrid());
+                document.getElementById('start-calibration').addEventListener('click', () => this.startCalibration());
+                document.getElementById('clear-grid').addEventListener('click', () => this.clearGrid());
+                
+                // Eventos de calibración
+                this.calibrationDots.forEach((dot, index) => {
+                    if (dot) {
+                        dot.addEventListener('click', (e) => {
+                            if (this.isCalibrating) {
+                                this.handleCalibrationDotClick(e, index);
+                            }
+                        });
+                    }
+                });
+
+                // Evento de redimensionamiento para recrear el grid
+                window.addEventListener('resize', () => {
+                    this.createPongGrid();
+                });
             }
         }
-        
-        // Agregar punto aleatorio
-        function addRandomPoint() {
-            if (!heatmapInstance) return;
-            
-            const x = Math.random() * 400;
-            const y = Math.random() * 400;
-            const value = Math.random() * 100;
-            
-            points.push({ x, y, value });
-            updateHeatmap();
-            updateStatus();
-            
-            console.log(`Punto agregado: (${Math.round(x)}, ${Math.round(y)}) - Valor: ${Math.round(value)}`);
-        }
-        
-        // Agregar patrón de prueba
-        function addTestPattern() {
-            if (!heatmapInstance) return;
-            
-            points = [
-                { x: 100, y: 100, value: 50 },
-                { x: 200, y: 150, value: 80 },
-                { x: 300, y: 200, value: 30 },
-                { x: 150, y: 300, value: 90 },
-                { x: 250, y: 100, value: 60 }
-            ];
-            
-            updateHeatmap();
-            updateStatus();
-            console.log('Patrón de prueba agregado');
-        }
-        
-        // Limpiar mapa
-        function clearHeatmap() {
-            if (!heatmapInstance) return;
-            
-            points = [];
-            updateHeatmap();
-            updateStatus();
-            console.log('Mapa de calor limpiado');
-        }
-        
-        // Actualizar mapa de calor
-        function updateHeatmap() {
-            if (!heatmapInstance) return;
-            
-            const data = {
-                max: 100,
-                data: points
-            };
-            
-            heatmapInstance.setData(data);
-        }
-        
-        // Actualizar estado
-        function updateStatus() {
-            document.getElementById('point-count').textContent = points.length;
-            
-            const maxValue = points.length > 0 ? Math.max(...points.map(p => p.value)) : 0;
-            document.getElementById('max-value').textContent = Math.round(maxValue);
-        }
-        
-        // Agregar puntos al hacer clic
-        document.querySelector('.heatmap-area').addEventListener('click', function(e) {
-            if (!heatmapInstance) return;
-            
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const value = 50 + Math.random() * 50; // Valor entre 50 y 100
-            
-            points.push({ x, y, value });
-            updateHeatmap();
-            updateStatus();
-            
-            console.log(`Clic en: (${Math.round(x)}, ${Math.round(y)}) - Valor: ${Math.round(value)}`);
-        });
-        
-        // Inicializar cuando se cargue la página
+
+        // Inicializar cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
-            // Esperar a que Heatmap.js se cargue
-            let attempts = 0;
-            const maxAttempts = 50;
-            
-            const checkHeatmap = () => {
-                attempts++;
-                
-                if (typeof h337 !== 'undefined') {
-                    initHeatmap();
-                } else if (attempts >= maxAttempts) {
-                    document.getElementById('status').textContent = 'Error: No se pudo cargar Heatmap.js';
-                } else {
-                    setTimeout(checkHeatmap, 100);
-                }
-            };
-            
-            checkHeatmap();
+            console.log('DOM cargado, inicializando PongGridTest...');
+            window.pongGridTest = new PongGridTest();
+            console.log('PongGridTest inicializado');
         });
     </script>
 </body>

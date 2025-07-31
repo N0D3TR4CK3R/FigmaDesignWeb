@@ -28,6 +28,9 @@
             height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .content-overlay {
@@ -42,6 +45,13 @@
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ocultar contenido durante el seguimiento */
+        .tracking-active .content-overlay {
+            opacity: 0;
+            pointer-events: none;
         }
         
         .control-panel {
@@ -109,11 +119,12 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5;
+            z-index: 15; /* Aumentado para estar por encima del grid */
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
         }
         
+        /* Contenedor de video reposicionado correctamente */
         .webgazer-video-container {
             position: fixed;
             bottom: 20px;
@@ -123,12 +134,23 @@
             border-radius: 10px;
             padding: 10px;
             backdrop-filter: blur(10px);
+            display: none;
+            text-align: center;
+            min-width: 220px;
         }
         
         .webgazer-video {
             width: 200px;
             height: 150px;
             border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .video-title {
+            color: white;
+            font-size: 0.9rem;
+            margin: 0;
+            font-weight: bold;
         }
         
         .stats-panel {
@@ -159,6 +181,7 @@
             z-index: 15;
             display: none;
             animation: pulse 1s infinite;
+            cursor: pointer;
         }
         
         .debug-info {
@@ -172,6 +195,172 @@
             font-size: 12px;
             z-index: 1001;
             max-width: 300px;
+        }
+
+        /* Área de seguimiento central */
+        .tracking-area {
+            position: relative;
+            width: 70%;
+            height: 70%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .tracking-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+            pointer-events: none;
+        }
+
+        /* Grid de cuadrados tipo Pong dentro del área de seguimiento */
+        .pong-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Grid por debajo del mapa de calor */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-square {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .grid-square:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .grid-square.clicked {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Puntos de calibración rojos dentro del área de seguimiento */
+        .calibration-dot {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff0000;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            z-index: 25; /* Por encima del mapa de calor */
+            display: none;
+            animation: pulse 1s infinite;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .calibration-dot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+        }
+
+        /* Ocultar contenido cuando esté en modo calibración */
+        .calibration-mode .content-overlay {
+            display: none;
+        }
+
+        .calibration-mode .tracking-area {
+            z-index: 3;
+        }
+
+        /* Información de calibración - MOVIDA FUERA DEL ÁREA DE SEGUIMIENTO */
+        .calibration-info {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+            min-width: 300px;
+        }
+
+        .calibration-info h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .calibration-info p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .calibration-progress {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .calibration-progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            transition: width 0.3s ease;
+        }
+
+        /* Indicador del área de seguimiento */
+        .tracking-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .tracking-indicator h4 {
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .tracking-indicator p {
+            opacity: 0.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Ocultar indicador cuando esté activo */
+        .tracking-active .tracking-indicator {
+            display: none;
+        }
+
+        /* Mostrar mapa de calor cuando esté activo */
+        .heatmap-active .heatmap-canvas {
+            z-index: 20; /* Por encima de todo */
+            pointer-events: none;
+        }
+
+        /* Mostrar mapa de calor en tiempo real durante el seguimiento */
+        .tracking-active .heatmap-canvas {
+            z-index: 15; /* Por encima del grid pero debajo de los puntos de calibración */
+            pointer-events: none;
         }
     </style>
 </head>
@@ -222,6 +411,32 @@
     <!-- Main Content -->
     <main id="main-content">
         <div class="heatmap-container">
+            <!-- Área de seguimiento central -->
+            <div class="tracking-area" id="tracking-area">
+                <!-- Grid de cuadrados tipo Pong -->
+                <div class="pong-grid" id="pong-grid"></div>
+                
+                <!-- Heatmap Canvas -->
+                <div id="heatmap-canvas" class="heatmap-canvas"></div>
+                
+                <!-- Puntos de calibración dinámicos -->
+                <div class="calibration-dot" id="calibration-dot-1"></div>
+                <div class="calibration-dot" id="calibration-dot-2"></div>
+                <div class="calibration-dot" id="calibration-dot-3"></div>
+                <div class="calibration-dot" id="calibration-dot-4"></div>
+                <div class="calibration-dot" id="calibration-dot-5"></div>
+                <div class="calibration-dot" id="calibration-dot-6"></div>
+                <div class="calibration-dot" id="calibration-dot-7"></div>
+                <div class="calibration-dot" id="calibration-dot-8"></div>
+                <div class="calibration-dot" id="calibration-dot-9"></div>
+                
+                <!-- Indicador del área de seguimiento -->
+                <div class="tracking-indicator" id="tracking-indicator">
+                    <h4><i class="fas fa-eye me-2"></i>Área de Seguimiento</h4>
+                    <p>Haz clic en "Iniciar Seguimiento" para comenzar a registrar tu mirada</p>
+                </div>
+            </div>
+            
             <!-- Content Overlay -->
             <div class="content-overlay">
                 <h1 class="display-4 mb-4">Mapa de Calor con Seguimiento Visual</h1>
@@ -256,16 +471,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Heatmap Canvas -->
-            <div id="heatmap-canvas" class="heatmap-canvas"></div>
-            
-            <!-- Calibration Points -->
-            <div class="calibration-point" id="calibration-point-1" style="top: 10%; left: 10%;"></div>
-            <div class="calibration-point" id="calibration-point-2" style="top: 10%; right: 10%;"></div>
-            <div class="calibration-point" id="calibration-point-3" style="top: 50%; left: 50%;"></div>
-            <div class="calibration-point" id="calibration-point-4" style="bottom: 10%; left: 10%;"></div>
-            <div class="calibration-point" id="calibration-point-5" style="bottom: 10%; right: 10%;"></div>
         </div>
     </main>
 
@@ -290,9 +495,9 @@
         </button>
     </div>
 
-    <!-- WebGazer Video Container -->
-    <div class="webgazer-video-container" id="webgazer-video-container" style="display: none;">
-        <h6 class="text-white mb-2">Vista de Cámara</h6>
+    <!-- WebGazer Video Container - REPOSICIONADO CORRECTAMENTE -->
+    <div class="webgazer-video-container" id="webgazer-video-container">
+        <h6 class="video-title">Vista de Cámara</h6>
         <video id="webgazer-video" class="webgazer-video" autoplay muted></video>
     </div>
 
@@ -320,6 +525,16 @@
         <div class="stats-item">
             <strong>Zona más activa:</strong> <span id="hotspot-area">-</span>
         </div>
+    </div>
+
+    <!-- Información de Calibración - MOVIDA FUERA DEL ÁREA DE SEGUIMIENTO -->
+    <div class="calibration-info" id="calibration-info">
+        <h3><i class="fas fa-crosshairs me-2"></i>Calibración en Progreso</h3>
+        <p>Haz clic en cada punto rojo que aparezca en el área de seguimiento para calibrar el seguimiento visual.</p>
+        <div class="calibration-progress">
+            <div class="calibration-progress-bar" id="calibration-progress-bar"></div>
+        </div>
+        <p id="calibration-status">Punto 1 de 9</p>
     </div>
 
     <!-- Footer -->
